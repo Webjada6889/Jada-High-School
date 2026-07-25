@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Teacher Management | Jada High School</title>
+
+<link rel="stylesheet" href="teachers.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#edf2f7;
+padding:40px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+header{
+display:flex;
+align-items:center;
+gap:20px;
+margin-bottom:30px;
+}
+
+.logo{
+width:80px;
+height:80px;
+}
+
+header h1{
+color:#0d6efd;
+}
+
+.card{
+background:#fff;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-bottom:30px;
+}
+
+.card h2{
+margin-bottom:20px;
+color:#0d6efd;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
+input{
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+font-size:15px;
+}
+
+input:focus{
+outline:none;
+border-color:#0d6efd;
+}
+
+button{
+margin-top:20px;
+background:#0d6efd;
+color:#fff;
+border:none;
+padding:14px 30px;
+border-radius:30px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#0047b3;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th{
+background:#0d6efd;
+color:#fff;
+padding:15px;
+}
+
+td{
+padding:12px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+.delete-btn{
+background:#dc3545;
+padding:8px 14px;
+border-radius:8px;
+color:#fff;
+border:none;
+cursor:pointer;
+}
+
+.delete-btn:hover{
+background:#bb2d3b;
+}
+
+footer{
+text-align:center;
+margin-top:30px;
+color:#666;
+}
+
+@media(max-width:768px){
+
+table{
+font-size:12px;
+display:block;
+overflow-x:auto;
+}
+
+header{
+flex-direction:column;
+text-align:center;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+<img src="school badge.png" class="logo">
+
+<div>
+
+<h1>Teacher Management</h1>
+
+<p>Jada High School Management System</p>
+
+</div>
+
+</header>
+
+
+<div class="card">
+
+<h2>Add New Teacher</h2>
+
+<div class="grid">
+
+<input type="text" id="name" placeholder="Teacher Full Name">
+
+<input type="text" id="staffID" placeholder="Staff ID">
+
+<input type="text" id="subject" placeholder="Subject">
+
+<input type="text" id="qualification" placeholder="Qualification">
+
+<input type="text" id="phone" placeholder="Phone Number">
+
+<input type="email" id="email" placeholder="Email Address">
+
+</div>
+
+<button onclick="addTeacher()">
+Add Teacher
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Teachers List</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Staff ID</th>
+<th>Subject</th>
+<th>Qualification</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="teacherTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<footer>
+
+Powered by <strong>Jada Creative Studio</strong>
+
+</footer>
+
+</div>
+
+<script>
+
+function addTeacher(){
+
+let name=document.getElementById("name").value;
+let staff=document.getElementById("staffID").value;
+let subject=document.getElementById("subject").value;
+let qualification=document.getElementById("qualification").value;
+let phone=document.getElementById("phone").value;
+let email=document.getElementById("email").value;
+
+if(name==="" || staff===""){
+alert("Please fill in the required fields.");
+return;
+}
+
+let table=document.getElementById("teacherTable");
+
+let row=table.insertRow();
+
+row.innerHTML=`
+<td>${name}</td>
+<td>${staff}</td>
+<td>${subject}</td>
+<td>${qualification}</td>
+<td>${phone}</td>
+<td>${email}</td>
+<td>
+<button class="delete-btn" onclick="deleteTeacher(this)">
+Delete
+</button>
+</td>
+`;
+
+document.getElementById("name").value="";
+document.getElementById("staffID").value="";
+document.getElementById("subject").value="";
+document.getElementById("qualification").value="";
+document.getElementById("phone").value="";
+document.getElementById("email").value="";
+}
+
+function deleteTeacher(button){
+button.parentElement.parentElement.remove();
+}
+
+</script>
+
+</body>
+</html>

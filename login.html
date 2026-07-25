@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Jada School Management System</title>
+
+    <link rel="stylesheet" href="css/login.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#2563eb,#4f46e5,#7c3aed);
+    background-size:300% 300%;
+    animation:gradient 10s ease infinite;
+    padding:20px;
+}
+
+/* Animated Background */
+
+@keyframes gradient{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* Login Card */
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.login-card{
+    width:100%;
+    max-width:430px;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:25px;
+    padding:40px;
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+    color:#fff;
+}
+
+/* Logo */
+
+.logo-area{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo-img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #fff;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    transition:.4s;
+}
+
+.logo-img:hover{
+    transform:rotate(5deg) scale(1.08);
+}
+
+.logo-text h2{
+    margin-top:15px;
+    font-size:30px;
+    font-weight:700;
+}
+
+.logo-text span{
+    font-size:15px;
+    opacity:.9;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:28px;
+}
+
+/* Inputs */
+
+.input-box{
+    display:flex;
+    align-items:center;
+    background:#fff;
+    border-radius:12px;
+    margin-bottom:18px;
+    padding:14px 16px;
+}
+
+.input-box i{
+    color:#2563eb;
+    font-size:18px;
+}
+
+.input-box input{
+    flex:1;
+    border:none;
+    outline:none;
+    margin-left:12px;
+    font-size:16px;
+}
+
+#togglePassword{
+    cursor:pointer;
+}
+
+/* Role */
+
+.role{
+    display:flex;
+    justify-content:space-between;
+    margin:20px 0;
+    color:white;
+    font-size:15px;
+}
+
+.role label{
+    cursor:pointer;
+}
+
+/* Button */
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#f59e0b;
+    color:white;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#d97706;
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+/* Links */
+
+.forgot,
+.home{
+    text-align:center;
+    margin-top:18px;
+}
+
+.forgot a,
+.home a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.forgot a:hover,
+.home a:hover{
+    color:#ffd166;
+}
+
+/* Responsive */
+
+@media(max-width:480px){
+
+    .login-card{
+        padding:30px 20px;
+    }
+
+    .logo-img{
+        width:90px;
+        height:90px;
+    }
+
+    .logo-text h2{
+        font-size:24px;
+    }
+
+    .role{
+        flex-direction:column;
+        gap:10px;
+    }
+
+}
+
+    </style>
+<body>
+
+<div class="container">
+
+    <div class="login-card">
+
+        <!-- School Logo -->
+        <div class="logo-area">
+
+            <img src="school badge.png"
+                 alt="Jada High School Logo"
+                 class="logo-img">
+
+            <div class="logo-text">
+                <h2>Jada High School</h2>
+                <span>School Management System</span>
+            </div>
+
+        </div>
+
+        <h1>Welcome Back 👋</h1>
+
+        <p class="subtitle">
+            Sign in to continue to your dashboard.
+        </p>
+
+        <form id="loginForm">
+
+            <!-- Email -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email Address"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+            <!-- Password -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                    required>
+
+                <i class="fa-solid fa-eye" id="togglePassword"></i>
+
+            </div>
+
+            <!-- Roles -->
+
+            <div class="role">
+
+                <label>
+                    <input type="radio" name="role" value="student" checked>
+                    🎓 Student
+                </label>
+
+                <label>
+                    <input type="radio" name="role" value="teacher">
+                    👨‍🏫 Teacher
+                </label>
+
+                <label>
+                    <input type="radio" name="role" value="admin">
+                    🛡️ Admin
+                </label>
+
+            </div>
+
+            <button type="submit">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Login
+            </button>
+
+        </form>
+
+        <p class="forgot">
+            <a href="#">Forgot Password?</a>
+        </p>
+
+        <p class="home">
+            <a href="index.html">
+                <i class="fa-solid fa-house"></i>
+                Back to Home
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+<script src="js/login.js"></script>
+
+</body>
+
+<script>
+// =============================
+// Login Page JavaScript
+// Jada School Management System
+// =============================
+
+// Elements
+const loginForm = document.getElementById("loginForm");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
+
+// =============================
+// Show / Hide Password
+// =============================
+
+togglePassword.addEventListener("click", () => {
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        togglePassword.classList.remove("fa-eye");
+        togglePassword.classList.add("fa-eye-slash");
+
+    } else {
+
+        password.type = "password";
+
+        togglePassword.classList.remove("fa-eye-slash");
+        togglePassword.classList.add("fa-eye");
+
+    }
+
+});
+
+// =============================
+// Demo Login Accounts
+// (Replace with Firebase later)
+// =============================
+
+const users = [
+
+    {
+        email: "admin@jada.edu.ng",
+        password: "admin123",
+        role: "admin"
+    },
+
+    {
+        email: "teacher@jada.edu.ng",
+        password: "teacher123",
+        role: "teacher"
+    },
+
+    {
+        email: "student@jada.edu.ng",
+        password: "student123",
+        role: "student"
+    }
+
+];
+
+// =============================
+// Login
+// =============================
+
+loginForm.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    const userEmail = email.value.trim();
+    const userPassword = password.value.trim();
+
+    const selectedRole = document.querySelector(
+        'input[name="role"]:checked'
+    ).value;
+
+    if (userEmail === "" || userPassword === "") {
+
+        alert("Please fill in all fields.");
+
+        return;
+
+    }
+
+    const user = users.find(account =>
+
+        account.email === userEmail &&
+        account.password === userPassword &&
+        account.role === selectedRole
+
+    );
+
+    if (user) {
+
+        // Save Login Session
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("role", user.role);
+        localStorage.setItem("email", user.email);
+
+        alert(`Welcome ${user.role.toUpperCase()}!`);
+
+        window.location.href = "dashboard.html";
+
+    } else {
+
+        alert("Invalid email, password or role.");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

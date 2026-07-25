@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jada School Management System</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+/* ===========================
+   GOOGLE FONT
+=========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#1d4ed8;
+    --accent:#f59e0b;
+    --dark:#0f172a;
+    --light:#f8fafc;
+    --text:#64748b;
+    --white:#fff;
+    --shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+body{
+    background:var(--light);
+    color:var(--dark);
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    backdrop-filter:blur(15px);
+    background:rgba(255,255,255,.92);
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.navbar{
+    width:90%;
+    max-width:1300px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo-img{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    border:4px solid var(--primary);
+    object-fit:cover;
+    transition:.4s;
+}
+
+.logo-img:hover{
+    transform:rotate(360deg);
+}
+
+.logo-text h2{
+    color:var(--primary);
+    font-size:24px;
+}
+
+.logo-text span{
+    color:var(--text);
+    font-size:14px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    list-style:none;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--dark);
+    font-weight:500;
+    transition:.3s;
+    position:relative;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:3px;
+    background:var(--primary);
+    transition:.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+    width:100%;
+}
+
+.login-btn{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:#fff !important;
+    padding:12px 25px;
+    border-radius:50px;
+    transition:.4s;
+}
+
+.login-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 25px rgba(37,99,235,.35);
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:#fff;
+    padding:0 20px;
+
+    background:
+    linear-gradient(rgba(15,23,42,.65),rgba(15,23,42,.65)),
+    url("image 1.jpg") center/cover;
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.hero h1{
+    font-size:60px;
+    margin-bottom:20px;
+    animation:slideDown 1s ease;
+}
+
+.hero span{
+    color:#ffd54f;
+}
+
+.hero p{
+    font-size:20px;
+    margin-bottom:40px;
+    opacity:.95;
+}
+
+.btn{
+    display:inline-block;
+    padding:15px 40px;
+    border-radius:50px;
+    text-decoration:none;
+    color:white;
+    background:linear-gradient(135deg,#f59e0b,#f97316);
+    font-weight:600;
+    transition:.4s;
+}
+
+.btn:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 25px rgba(249,115,22,.35);
+}
+
+/* ===========================
+   SECTIONS
+=========================== */
+
+section{
+    padding:90px 8%;
+}
+
+section h2{
+    text-align:center;
+    font-size:40px;
+    color:var(--primary);
+    margin-bottom:20px;
+}
+
+section h2::after{
+    content:"";
+    width:80px;
+    height:4px;
+    background:var(--accent);
+    display:block;
+    margin:10px auto;
+    border-radius:10px;
+}
+
+/* ABOUT */
+
+.about p{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    color:var(--text);
+    font-size:18px;
+}
+
+/* ===========================
+   STATISTICS
+=========================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    margin-top:50px;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    text-align:center;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-12px);
+}
+
+.card i{
+    font-size:60px;
+    color:var(--primary);
+    margin-bottom:20px;
+}
+
+.card h3{
+    font-size:35px;
+}
+
+.card p{
+    color:var(--text);
+}
+
+/* ===========================
+   GALLERY
+=========================== */
+
+.gallery{
+    background:#eef4ff;
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.gallery-item{
+    overflow:hidden;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    position:relative;
+}
+
+.gallery-item img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.1);
+}
+
+.gallery-item::before{
+    content:"View";
+    position:absolute;
+    inset:0;
+    background:rgba(37,99,235,.45);
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transition:.4s;
+}
+
+.gallery-item:hover::before{
+    opacity:1;
+}
+
+/* ===========================
+   CONTACT
+=========================== */
+
+.contact{
+    text-align:center;
+}
+
+.contact p{
+    font-size:18px;
+    margin:15px 0;
+    color:var(--text);
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer{
+    background:var(--dark);
+    color:white;
+    text-align:center;
+    padding:35px;
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+
+@keyframes slideDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-80px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+    .navbar{
+        flex-direction:column;
+        gap:20px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .hero p{
+        font-size:18px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    section{
+        padding:70px 20px;
+    }
+
+    .logo-img{
+        width:50px;
+        height:50px;
+    }
+
+    .logo-text h2{
+        font-size:20px;
+    }
+
+}
+    </style>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo-area">
+
+            <img src="school badge.png" alt="Jada High School Logo" class="logo-img">
+
+            <div class="logo-text">
+                <h2>Jada High School</h2>
+                <span>School Management System</span>
+            </div>
+
+        </div>
+
+        <ul class="nav-links">
+
+            <li><a href="#" class="active">Home</a></li>
+
+            <li><a href="#about">About</a></li>
+
+            <li><a href="#stats">Statistics</a></li>          
+
+            <li><a href="#gallery">Gallery</a></li>
+
+            <li><a href="#contact">Contact</a></li>
+
+            <li>
+                <a href="login.html" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Welcome to <span>Jada High School Management System</span>
+        </h1>
+
+        <p>
+            A modern digital platform for students,
+            teachers, parents, and school administrators.
+        </p>
+
+        <a href="#" class="btn">
+            Get Started
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about" class="about">
+
+    <h2>About Our School</h2>
+
+    <p>
+
+        Jada High School Management System is designed
+        to simplify school administration,
+        improve communication,
+        and provide students with
+        easy access to academic information.
+
+    </p>
+
+</section>
+
+<!-- ================= STATISTICS ================= -->
+
+<section id="stats" class="stats">
+
+    <h2>School Statistics</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <i class="fas fa-user-graduate"></i>
+            <h3>1,200+</h3>
+            <p>Students</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <h3>80+</h3>
+            <p>Teachers</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-school"></i>
+            <h3>35</h3>
+            <p>Classes</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>100%</h3>
+            <p>Success</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= GALLERY ================= -->
+
+<section id="gallery" class="gallery">
+
+    <h2>School Gallery</h2>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item">
+            <img src="image 1.jpg" alt="School Building">
+        </div>
+
+        <div class="gallery-item">
+            <img src="image 2.jpg" alt="School Building">
+        </div>
+
+                <div class="gallery-item">
+            <img src="image 3.jpg" alt="School Building">
+        </div>
+
+
+    </div>
+
+</section>
+<!-- ================= CONTACT ================= -->
+
+<section id="contact" class="contact">
+
+    <h2>Contact Us</h2>
+
+    <p>Email: info@jadaschool.com</p>
+
+    <p>Phone: +234 7014304763</p> 
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+
+        © 2026 Jada High School Management System.
+        All Rights Reserved.
+
+    </p>
+
+</footer>
+
+<script>
+
+// ===============================
+// Sticky Navbar
+// ===============================
+
+const header = document.querySelector("header");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 50) {
+        header.style.background = "#ffffff";
+        header.style.boxShadow = "0 5px 15px rgba(0,0,0,.1)";
+    } else {
+        header.style.background = "rgba(255,255,255,.95)";
+        header.style.boxShadow = "none";
+    }
+
+});
+
+// ===============================
+// Smooth Scrolling
+// ===============================
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+    link.addEventListener("click", function(e) {
+
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute("href"));
+
+        if(target){
+
+            target.scrollIntoView({
+                behavior:"smooth"
+            });
+
+        }
+
+    });
+
+});
+
+// ===============================
+// Active Navigation Link
+// ===============================
+
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.clientHeight;
+
+        if(window.scrollY >= sectionTop){
+            current = section.getAttribute("id");
+        }
+
+    });
+
+    navLinks.forEach(link => {
+
+        link.classList.remove("active");
+
+        if(link.getAttribute("href") === "#" + current){
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+});
+
+// ===============================
+// Fade-in Animation
+// ===============================
+
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:.2
+});
+
+document.querySelectorAll(".card,.box,.about,.contact").forEach(item=>{
+
+    item.classList.add("hidden");
+
+    observer.observe(item);
+
+});
+
+// ===============================
+// Typing Effect
+// ===============================
+
+const text = "Manage Students, Teachers, Results and More.";
+
+const typingElement = document.createElement("p");
+
+typingElement.className = "typing";
+
+document.querySelector(".hero-content").appendChild(typingElement);
+
+let index = 0;
+
+function typeWriter(){
+
+    if(index < text.length){
+
+        typingElement.innerHTML += text.charAt(index);
+
+        index++;
+
+        setTimeout(typeWriter,50);
+
+    }
+
+}
+
+typeWriter();
+
+// ===============================
+// Back To Top Button
+// ===============================
+
+const topBtn = document.createElement("button");
+
+topBtn.innerHTML = "⬆";
+
+topBtn.id = "topBtn";
+
+document.body.appendChild(topBtn);
+
+topBtn.onclick = () => {
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+};
+
+window.addEventListener("scroll",()=>{
+
+    if(window.scrollY > 400){
+
+        topBtn.style.display="block";
+
+    }else{
+
+        topBtn.style.display="none";
+
+    }
+
+});
+
+// ===============================
+// Welcome Message
+// ===============================
+
+console.log("🎓 Welcome to Jada School Management System");
+
+</script>
+
+</body>
+</html>

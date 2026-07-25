@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jada Result Checker</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+    min-height:100vh;
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #0d6efd,
+    #001f54
+    );
+
+    padding:40px 15px;
+
+}
+
+
+
+/* MAIN CONTAINER */
+
+.container{
+
+    max-width:900px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.2);
+
+}
+
+
+
+/* HEADER */
+
+
+.header{
+
+    text-align:center;
+
+    padding-bottom:25px;
+
+    border-bottom:2px solid #eee;
+
+}
+
+
+.logo-img{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:contain;
+
+    border-radius:50%;
+
+    margin-bottom:15px;
+
+}
+
+
+.header h1{
+
+    color:#0d6efd;
+
+    font-size:35px;
+
+}
+
+
+.header p{
+
+    color:#666;
+
+}
+
+
+
+/* INPUT AREA */
+
+
+.input-group{
+
+    margin-top:20px;
+
+}
+
+
+.input-group label{
+
+    display:block;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+    color:#333;
+
+}
+
+
+
+input,
+select{
+
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+
+
+input:focus,
+select:focus{
+
+    border-color:#0d6efd;
+
+    box-shadow:0 0 10px rgba(13,110,253,.2);
+
+}
+
+
+
+
+/* SUBJECT SECTION */
+
+
+h3{
+
+    margin-top:35px;
+
+    color:#0d6efd;
+
+    text-align:center;
+
+}
+
+
+
+.subject-row{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:15px;
+
+}
+
+
+.subject{
+
+    flex:2;
+
+}
+
+
+.score{
+
+    flex:1;
+
+}
+
+
+
+
+/* BUTTON */
+
+
+button{
+
+    width:100%;
+
+    margin-top:30px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #0d6efd,
+    #004aad
+    );
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 10px 25px rgba(13,110,253,.4);
+
+}
+
+
+
+/* FOOTER */
+
+
+footer{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:#777;
+
+}
+
+
+
+
+/* RESULT CARD */
+
+
+.result-card{
+
+    max-width:900px;
+
+    margin:40px auto;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,.2);
+
+}
+
+
+
+.top{
+
+    text-align:center;
+
+    background:#0d6efd;
+
+    color:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+}
+
+
+
+.top h2{
+
+    font-size:28px;
+
+}
+
+
+
+.student-info{
+
+    margin:25px 0;
+
+    background:#f4f7fc;
+
+    padding:20px;
+
+    border-radius:15px;
+
+}
+
+
+
+.student-info p{
+
+    margin:10px 0;
+
+}
+
+
+
+
+/* RESULT TABLE */
+
+
+.result-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+}
+
+
+
+.result-table th{
+
+    background:#0d6efd;
+
+    color:white;
+
+    padding:14px;
+
+}
+
+
+
+.result-table td{
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    text-align:center;
+
+}
+
+
+
+.result-table tfoot{
+
+    font-weight:600;
+
+}
+
+
+
+
+/* SIGNATURE */
+
+
+.signature{
+
+    margin-top:50px;
+
+    text-align:right;
+
+}
+
+
+
+/* PRINT BUTTON */
+
+
+.print-btn{
+
+    background:#ffc107;
+
+    color:#222;
+
+}
+
+
+
+/* MOBILE */
+
+
+@media(max-width:600px){
+
+
+.container,
+.result-card{
+
+    padding:20px;
+
+}
+
+
+
+.header h1{
+
+    font-size:25px;
+
+}
+
+
+
+.subject-row{
+
+    flex-direction:column;
+
+}
+
+
+
+.result-table{
+
+    font-size:12px;
+
+}
+
+
+
+}
+
+
+@media print{
+
+
+body{
+
+    background:white;
+
+}
+
+
+.container,
+.print-btn{
+
+    display:none;
+
+}
+
+
+.result-card{
+
+    box-shadow:none;
+
+    margin:0;
+
+}
+
+
+}
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+                    <img src="school badge.png"
+                 alt="Jada High School Logo"
+                 class="logo-img">
+
+        <h1>Jada Result Checker</h1>
+        <p>Check your examination grade instantly.</p>
+    </div>
+
+    <!-- Student Details -->
+    <div class="input-group">
+        <label>Student Name</label>
+        <input type="text" id="name" placeholder="Enter full name">
+    </div>
+
+    <div class="input-group">
+        <label>Exam Number</label>
+        <input type="text" id="examNo" placeholder="AMHS/2026/001">
+    </div>
+
+    <div class="input-group">
+        <label>Class</label>
+        <select id="class">
+            <option>SS1</option>
+            <option>SS2</option>
+            <option>SS3</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>Term</label>
+        <select id="term">
+            <option>First Term</option>
+            <option>Second Term</option>
+            <option>Third Term</option>
+        </select>
+    </div>
+
+    <!-- Subjects -->
+    <h3>Subjects & Scores</h3>
+
+    <div id="subjects">
+        <div class="subject-row">
+           <select class="subject">
+    <option value="">Select Subject</option>
+    <option>Mathematics</option>
+    <option>English Language</option>
+    <option>Physics</option>
+    <option>Chemistry</option>
+    <option>Biology</option>
+    <option>Further Mathematics</option>
+    <option>Economics</option>
+    <option>Government</option>
+    <option>Geography</option>
+    <option>Computer Science</option>
+    <option>Commerce</option>
+    <option>Accounting</option>
+    <option>Civic Education</option>
+    <option>Agricultural Science</option>
+    <option>Literature in English</option>
+</select>
+
+            <input
+                type="number"
+                class="score"
+                placeholder="Score (0-100)"
+                min="0"
+                max="100">
+        </div>
+    </div>
+
+    <div id="subjects">
+        <div class="subject-row">
+           <select class="subject">
+    <option value="">Select Subject</option>
+    <option>Mathematics</option>
+    <option>English Language</option>
+    <option>Physics</option>
+    <option>Chemistry</option>
+    <option>Biology</option>
+    <option>Further Mathematics</option>
+    <option>Economics</option>
+    <option>Government</option>
+    <option>Geography</option>
+    <option>Computer Science</option>
+    <option>Commerce</option>
+    <option>Accounting</option>
+    <option>Civic Education</option>
+    <option>Agricultural Science</option>
+    <option>Literature in English</option>
+</select>
+
+            <input
+                type="number"
+                class="score"
+                placeholder="Score (0-100)"
+                min="0"
+                max="100">
+        </div>
+    </div>
+
+    <!-- Subjects -->
+    <!-- <h3>Subjects & Scores</h3> -->
+
+    <div id="subjects">
+        <div class="subject-row">
+           <select class="subject">
+    <option value="">Select Subject</option>
+    <option>Mathematics</option>
+    <option>English Language</option>
+    <option>Physics</option>
+    <option>Chemistry</option>
+    <option>Biology</option>
+    <option>Further Mathematics</option>
+    <option>Economics</option>
+    <option>Government</option>
+    <option>Geography</option>
+    <option>Computer Science</option>
+    <option>Commerce</option>
+    <option>Accounting</option>
+    <option>Civic Education</option>
+    <option>Agricultural Science</option>
+    <option>Literature in English</option>
+</select>
+
+            <input
+                type="number"
+                class="score"
+                placeholder="Score (0-100)"
+                min="0"
+                max="100">
+        </div>
+    </div>
+
+    <!-- Subjects -->
+    <!-- <h3>Subjects & Scores</h3> -->
+
+    <div id="subjects">
+        <div class="subject-row">
+           <select class="subject">
+    <option value="">Select Subject</option>
+    <option>Mathematics</option>
+    <option>English Language</option>
+    <option>Physics</option>
+    <option>Chemistry</option>
+    <option>Biology</option>
+    <option>Further Mathematics</option>
+    <option>Economics</option>
+    <option>Government</option>
+    <option>Geography</option>
+    <option>Computer Science</option>
+    <option>Commerce</option>
+    <option>Accounting</option>
+    <option>Civic Education</option>
+    <option>Agricultural Science</option>
+    <option>Literature in English</option>
+</select>
+
+            <input
+                type="number"
+                class="score"
+                placeholder="Score (0-100)"
+                min="0"
+                max="100">
+        </div>
+    </div>
+
+    
+    <!-- <button onclick="addSubject()">
+        + Add Another Subject
+    </button> -->
+
+    <button onclick="checkResult()">
+        Check Result
+    </button>
+
+    <footer>
+        Powered by <strong>Jada Creative Studio</strong>
+    </footer>
+
+</div>
+
+<!-- Result Card -->
+
+<div class="result-card" style="display:none;">
+
+    <div class="top">
+        <h2>JADA RESULT CHECKER</h2>
+        <p>Powered by Jada Creative Studio</p>
+    </div>
+
+    <div class="student-info">
+        <p><strong>Candidate:</strong> <span id="studentName"></span></p>
+        <p><strong>Exam No:</strong> <span id="studentExamNo"></span></p>
+        <p><strong>Class:</strong> <span id="studentClass"></span></p>
+        <p><strong>Term:</strong> <span id="studentTerm"></span></p>
+        <p><strong>Session:</strong> 2025/2026</p>
+    </div>
+
+    <table class="result-table">
+
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Grade</th>
+                <th>Remark</th>
+            </tr>
+        </thead>
+
+        <tbody id="resultBody"></tbody>
+
+        <tfoot>
+
+            <tr>
+                <td colspan="2"><strong>Total</strong></td>
+                <td colspan="2" id="total"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><strong>Average</strong></td>
+                <td colspan="2" id="average"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><strong>Overall Grade</strong></td>
+                <td colspan="2" id="overall"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><strong>Status</strong></td>
+                <td colspan="2" id="status"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><strong>Teacher's Comment</strong></td>
+                <td colspan="2" id="comment"></td>
+            </tr>
+
+        </tfoot>
+
+    </table>
+
+    <div class="signature">
+        ___________________________<br>
+        <strong>Principal's Signature</strong>
+    </div>
+
+    <br>
+<button class="print-btn" onclick="window.print()">
+    🖨 Print Result
+</button>
+
+</div>
+
+<script>
+
+    // Add another subject row
+function addSubject() {
+
+    const subjects = document.getElementById("subjects");
+
+    const row = document.createElement("div");
+    row.className = "subject-row";
+
+    row.innerHTML = `
+        <select class="subject">
+            <option value="">Select Subject</option>
+            <option>Mathematics</option>
+            <option>English Language</option>
+            <option>Physics</option>
+            <option>Chemistry</option>
+            <option>Biology</option>
+            <option>Further Mathematics</option>
+            <option>Economics</option>
+            <option>Government</option>
+            <option>Geography</option>
+            <option>Computer Science</option>
+            <option>Commerce</option>
+            <option>Accounting</option>
+            <option>Civic Education</option>
+            <option>Agricultural Science</option>
+            <option>Literature in English</option>
+        </select>
+
+        <input
+            type="number"
+            class="score"
+            placeholder="Score"
+            min="0"
+            max="100">
+    `;
+
+    subjects.appendChild(row);
+}
+
+// Get grade
+function getGrade(score){
+
+    if(score >= 70) return "A";
+    if(score >= 60) return "B";
+    if(score >= 50) return "C";
+    if(score >= 45) return "D";
+    if(score >= 40) return "E";
+
+    return "F";
+}
+
+// Get remark
+function getRemark(score){
+
+    if(score >= 70) return "Excellent";
+    if(score >= 60) return "Very Good";
+    if(score >= 50) return "Good";
+    if(score >= 45) return "Fair";
+    if(score >= 40) return "Pass";
+
+    return "Fail";
+}
+
+// Teacher comment
+function getComment(avg){
+
+    if(avg >= 70)
+        return "Excellent performance. Keep it up.";
+
+    if(avg >= 60)
+        return "Very good performance.";
+
+    if(avg >= 50)
+        return "Good effort. Keep improving.";
+
+    if(avg >= 45)
+        return "Fair performance.";
+
+    if(avg >= 40)
+        return "You passed, but more effort is needed.";
+
+    return "Poor performance. Study harder.";
+}
+
+// Check result
+function checkResult(){
+
+    const name = document.getElementById("name").value.trim();
+    const examNo = document.getElementById("examNo").value.trim();
+    const studentClass = document.getElementById("class").value;
+    const term = document.getElementById("term").value;
+
+    if(name === ""){
+        alert("Please enter the student's name.");
+        return;
+    }
+
+    const subjects = document.querySelectorAll(".subject");
+    const scores = document.querySelectorAll(".score");
+
+    if(subjects.length === 0){
+        alert("Please add at least one subject.");
+        return;
+    }
+
+    let total = 0;
+
+    let highest = 0;
+    let lowest = 100;
+
+    const body = document.getElementById("resultBody");
+    body.innerHTML = "";
+
+    for(let i=0;i<subjects.length;i++){
+
+        const subject = subjects[i].value;
+        const score = Number(scores[i].value);
+
+        if(subject === ""){
+            alert("Select all subjects.");
+            return;
+        }
+
+        if(isNaN(score) || score < 0 || score > 100){
+            alert("Enter a valid score between 0 and 100.");
+            return;
+        }
+
+        total += score;
+
+        if(score > highest)
+            highest = score;
+
+        if(score < lowest)
+            lowest = score;
+
+        body.innerHTML += `
+            <tr>
+                <td>${subject}</td>
+                <td>${score}</td>
+                <td>${getGrade(score)}</td>
+                <td>${getRemark(score)}</td>
+            </tr>
+        `;
+    }
+
+    const average = total / scores.length;
+
+    const overallGrade = getGrade(average);
+
+    const status = average >= 40 ? "PASS" : "FAIL";
+
+    // Fill candidate information
+
+    document.getElementById("studentName").textContent = name;
+
+    document.getElementById("studentExamNo").textContent =
+        examNo || "Not Provided";
+
+    document.getElementById("studentClass").textContent =
+        studentClass;
+
+    document.getElementById("studentTerm").textContent =
+        term;
+
+    document.getElementById("total").textContent =
+        total;
+
+    document.getElementById("average").textContent =
+        average.toFixed(2);
+
+    document.getElementById("overall").textContent =
+        overallGrade;
+
+    document.getElementById("status").innerHTML =
+        status === "PASS"
+        ? `<span class="status-pass">PASS</span>`
+        : `<span class="status-fail">FAIL</span>`;
+
+    document.getElementById("comment").textContent =
+        getComment(average);
+
+    // Show result card
+    document.querySelector(".result-card").style.display = "block";
+
+    // Scroll to result
+    document.querySelector(".result-card").scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jada High School Attendance</title>
+
+<link rel="stylesheet" href="attendance.css">
+<style>
+
+@import url(
+'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap'
+);
+
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+
+}
+
+
+body{
+
+background:linear-gradient(
+135deg,
+#0d6efd,
+#001f54
+);
+
+padding:40px;
+
+}
+
+
+
+.container{
+
+max-width:900px;
+
+margin:auto;
+
+background:white;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 20px 40px #0003;
+
+}
+
+
+
+.header{
+
+text-align:center;
+
+}
+
+
+
+.logo{
+
+width:90px;
+
+height:90px;
+
+}
+
+
+
+.header h1{
+
+color:#0d6efd;
+
+}
+
+
+
+.form{
+
+margin-top:30px;
+
+}
+
+
+
+label{
+
+display:block;
+
+margin-top:15px;
+
+font-weight:600;
+
+}
+
+
+
+input,
+select{
+
+
+width:100%;
+
+padding:14px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+margin-top:5px;
+
+}
+
+
+
+button{
+
+margin-top:25px;
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:30px;
+
+background:#0d6efd;
+
+color:white;
+
+font-size:17px;
+
+cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+background:#004aad;
+
+}
+
+
+
+h2{
+
+margin-top:40px;
+
+text-align:center;
+
+color:#0d6efd;
+
+}
+
+
+
+table{
+
+width:100%;
+
+margin-top:20px;
+
+border-collapse:collapse;
+
+}
+
+
+
+th{
+
+background:#0d6efd;
+
+color:white;
+
+padding:12px;
+
+}
+
+
+
+td{
+
+padding:12px;
+
+border:1px solid #ddd;
+
+text-align:center;
+
+}
+
+
+
+footer{
+
+text-align:center;
+
+margin-top:30px;
+
+color:#777;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="header">
+
+<img src="school badge.png" class="logo">
+
+<h1>Jada High School</h1>
+
+<p>Student Attendance Management System</p>
+
+</div>
+
+
+
+<div class="form">
+
+
+<label>Student Name</label>
+<input type="text" id="name" placeholder="Enter student name">
+
+
+<label>Student ID</label>
+<input type="text" id="studentID" placeholder="AMHS/2026/001">
+
+
+<label>Class</label>
+
+<select id="class">
+
+<option>SS1</option>
+<option>SS2</option>
+<option>SS3</option>
+
+</select>
+
+
+
+<label>Attendance Status</label>
+
+<select id="status">
+
+<option>Present</option>
+<option>Absent</option>
+
+</select>
+
+
+
+<button onclick="addAttendance()">
+Save Attendance
+</button>
+
+
+</div>
+
+
+
+<h2>Attendance Record</h2>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>ID</th>
+<th>Class</th>
+<th>Status</th>
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="attendanceList">
+
+
+</tbody>
+
+
+</table>
+
+
+
+<footer>
+
+Powered by <strong>Jada Creative Studio</strong>
+
+</footer>
+
+
+</div>
+
+
+
+<script>
+
+function addAttendance(){
+
+
+let name =
+document.getElementById("name").value;
+
+
+let id =
+document.getElementById("studentID").value;
+
+
+let studentClass =
+document.getElementById("class").value;
+
+
+let status =
+document.getElementById("status").value;
+
+
+
+let date =
+new Date().toLocaleDateString();
+
+
+
+let row = `
+
+<tr>
+
+<td>${name}</td>
+
+<td>${id}</td>
+
+<td>${studentClass}</td>
+
+<td>${status}</td>
+
+<td>${date}</td>
+
+</tr>
+
+`;
+
+
+
+document.getElementById("attendanceList")
+.innerHTML += row;
+
+
+
+document.getElementById("name").value="";
+document.getElementById("studentID").value="";
+
+
+}
+
+</script>
+
+</body>
+
+</html>

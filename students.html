@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students | Jada School Management System</title>
+
+    <link rel="stylesheet" href="css/students.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+    padding:30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+header h1{
+    color:#2563eb;
+}
+
+#addStudentBtn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+#addStudentBtn:hover{
+    background:#1e40af;
+}
+
+.search-box{
+    margin-bottom:20px;
+}
+
+.search-box input{
+    width:100%;
+    padding:14px;
+    border:2px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+th{
+    background:#2563eb;
+    color:white;
+    padding:15px;
+    text-align:left;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #eee;
+}
+
+tr:hover{
+    background:#f8f9ff;
+}
+
+.edit{
+    background:#f59e0b;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.delete{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* Modal */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content{
+    width:400px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+}
+
+.modal-content h2{
+    margin-bottom:20px;
+    color:#2563eb;
+}
+
+.modal-content input,
+.modal-content select{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:space-between;
+}
+
+#saveBtn{
+    background:#22c55e;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#closeBtn{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+@media(max-width:768px){
+
+    body{
+        padding:15px;
+    }
+
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    table{
+        display:block;
+        overflow-x:auto;
+    }
+
+    .modal-content{
+        width:95%;
+    }
+
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+
+        <h1>🎓 Student Management</h1>
+
+        <button id="addStudentBtn">
+            <i class="fas fa-plus"></i>
+            Add Student
+        </button>
+
+    </header>
+
+    <div class="search-box">
+
+        <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Student...">
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Class</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="studentTable">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- Modal -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <h2>Add Student</h2>
+
+        <input
+        type="text"
+        id="name"
+        placeholder="Student Name">
+
+        <select id="gender">
+
+            <option>Male</option>
+            <option>Female</option>
+
+        </select>
+
+        <select id="studentClass">
+
+            <option>JSS1</option>
+            <option>JSS2</option>
+            <option>JSS3</option>
+
+            <option>SS1</option>
+            <option>SS2</option>
+            <option>SS3</option>
+
+        </select>
+
+        <div class="buttons">
+
+            <button id="saveBtn">Save</button>
+
+            <button id="closeBtn">Close</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const modal = document.getElementById("modal");
+const addBtn = document.getElementById("addStudentBtn");
+const closeBtn = document.getElementById("closeBtn");
+const saveBtn = document.getElementById("saveBtn");
+const table = document.getElementById("studentTable");
+const searchInput = document.getElementById("searchInput");
+
+const nameInput = document.getElementById("name");
+const genderInput = document.getElementById("gender");
+const classInput = document.getElementById("studentClass");
+
+let students = JSON.parse(localStorage.getItem("students")) || [];
+
+let editIndex = -1;
+
+// Open modal
+addBtn.onclick = () => {
+    modal.style.display = "flex";
+    clearForm();
+    editIndex = -1;
+};
+
+// Close modal
+closeBtn.onclick = () => {
+    modal.style.display = "none";
+};
+
+// Save student
+saveBtn.onclick = () => {
+
+    if(nameInput.value.trim() === ""){
+        alert("Please enter the student's name.");
+        return;
+    }
+
+    const student = {
+        id: editIndex === -1 ? Date.now() : students[editIndex].id,
+        name: nameInput.value,
+        gender: genderInput.value,
+        class: classInput.value
+    };
+
+    if(editIndex === -1){
+        students.push(student);
+    }else{
+        students[editIndex] = student;
+    }
+
+    saveData();
+    renderStudents();
+
+    modal.style.display = "none";
+};
+
+// Render table
+function renderStudents(list = students){
+
+    table.innerHTML = "";
+
+    list.forEach((student,index)=>{
+
+        table.innerHTML += `
+        <tr>
+            <td>${student.id}</td>
+            <td>${student.name}</td>
+            <td>${student.gender}</td>
+            <td>${student.class}</td>
+            <td>
+                <button class="edit" onclick="editStudent(${index})">
+                    Edit
+                </button>
+
+                <button class="delete" onclick="deleteStudent(${index})">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        `;
+
+    });
+
+}
+
+// Edit student
+function editStudent(index){
+
+    editIndex = index;
+
+    nameInput.value = students[index].name;
+    genderInput.value = students[index].gender;
+    classInput.value = students[index].class;
+
+    modal.style.display = "flex";
+
+}
+
+// Delete student
+function deleteStudent(index){
+
+    if(confirm("Delete this student?")){
+
+        students.splice(index,1);
+
+        saveData();
+
+        renderStudents();
+
+    }
+
+}
+
+// Search
+searchInput.addEventListener("keyup",()=>{
+
+    const keyword = searchInput.value.toLowerCase();
+
+    const filtered = students.filter(student=>
+
+        student.name.toLowerCase().includes(keyword) ||
+        student.class.toLowerCase().includes(keyword)
+
+    );
+
+    renderStudents(filtered);
+
+});
+
+// Save to Local Storage
+function saveData(){
+
+    localStorage.setItem("students",JSON.stringify(students));
+
+}
+
+// Clear form
+function clearForm(){
+
+    nameInput.value = "";
+    genderInput.selectedIndex = 0;
+    classInput.selectedIndex = 0;
+
+}
+
+// Initial load
+renderStudents();
+
+</script>
+
+</body>
+</html>
